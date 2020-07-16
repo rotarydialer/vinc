@@ -41,18 +41,44 @@ func main() {
 	fmt.Println("incFlag: " + incFlag)
 
 	retVer = bumpMajor(srcVer)
+	fmt.Println(strings.Join(retVer, "."))
 
+	retVer = bumpMinor(srcVer)
+	fmt.Println(strings.Join(retVer, "."))
+
+	retVer = bumpPatch(srcVer)
 	fmt.Println(strings.Join(retVer, "."))
 }
 
 func bumpMajor(incVer []string) []string {
-	fmt.Println(incVer)
 	var retVer []string
 
 	incVal, _ := strconv.Atoi(incVer[0])
 	retVer = append(retVer, strconv.Itoa(incVal + 1))
 	retVer = append(retVer, "0")
 	retVer = append(retVer, "0")
+
+	return retVer
+}
+
+func bumpMinor(incVer []string) []string {
+	var retVer []string
+
+	incVal, _ := strconv.Atoi(incVer[1])
+	retVer = append(retVer, incVer[0])
+	retVer = append(retVer, strconv.Itoa(incVal + 1))
+	retVer = append(retVer, "0")
+
+	return retVer
+}
+
+func bumpPatch(incVer []string) []string {
+	var retVer []string
+
+	incVal, _ := strconv.Atoi(incVer[2])
+	retVer = append(retVer, incVer[0])
+	retVer = append(retVer, incVer[1])
+	retVer = append(retVer, strconv.Itoa(incVal + 1))
 
 	return retVer
 }
