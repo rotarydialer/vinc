@@ -29,25 +29,22 @@ func main() {
 			showVersion()
 			os.Exit(1)
 		}
-
-		fmt.Println(arg)
 	}
 
 	srcVer := strings.Split(os.Args[1], ".")
 	retVer := srcVer
 	incFlag := os.Args[2]
 
-	fmt.Println("srcVer: " + srcVer[0] + " . " + srcVer[1] + " . " + srcVer[2])
 	fmt.Println("incFlag: " + incFlag)
 
 	retVer = bumpMajor(srcVer)
-	fmt.Println(strings.Join(retVer, "."))
+	fmt.Println("Major version: " + strings.Join(retVer, "."))
 
 	retVer = bumpMinor(srcVer)
-	fmt.Println(strings.Join(retVer, "."))
+	fmt.Println("Minor version: " + strings.Join(retVer, "."))
 
 	retVer = bumpPatch(srcVer)
-	fmt.Println(strings.Join(retVer, "."))
+	fmt.Println("Patch version: " + strings.Join(retVer, "."))
 }
 
 func bumpMajor(incVer []string) []string {
