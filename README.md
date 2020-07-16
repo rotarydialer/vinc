@@ -1,6 +1,8 @@
 # vinc
 `vinc` (`v`ersion `inc`rement) is a simple semantic versioning utility written in [Go](https://golang.org/). It follows the standard set forth in [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html)
 
+We created this because we struggled to find a Maven plugin for Compass that semantically versioned correctly. This utility is meant to function similar to [the `semver` npm module](https://www.npmjs.com/package/semver).
+
 ## Prerequisites
 - [Go v1.14](https://golang.org/dl/)
 
