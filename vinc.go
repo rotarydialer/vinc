@@ -10,25 +10,25 @@ import (
 var version string
 
 func main() {
-	version = "0.1.0"
+	version = "0.2.0"
 
 	args := os.Args[1:]
-
-	if (len(args) < 2) {
-		showUsage()
-		os.Exit(1)
-	}
 
 	for _, arg := range args {
 		if (arg == "--help" || arg == "-h") {
 			showUsage()
-			os.Exit(1)
+			os.Exit(0)
 		}
 
 		if (arg == "--version" || arg == "-v") {
 			showVersion()
-			os.Exit(1)
+			os.Exit(0)
 		}
+	}
+
+	if (len(args) < 2) {
+		showUsage()
+		os.Exit(3)
 	}
 
 	srcVer := strings.Split(os.Args[1], ".")
