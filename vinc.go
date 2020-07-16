@@ -32,6 +32,7 @@ func main() {
 }
 
 func showVersion() {
+	fmt.Println("https://github.inbcu.com/d2c-integrations/vinc")
 	fmt.Println(version)
 }
 
