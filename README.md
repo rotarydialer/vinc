@@ -37,5 +37,5 @@ Compile with `go build vinc.go`. This will produce a portable, standalone binary
 
 | Flag | Details |
 --- | --- |
-| `--help | -h` | Displays usage/help |
-| `--version | -v` | Displays vinc version |
+| `--help, -h` | Displays usage/help |
+| `--version, -v` | Displays vinc version |
