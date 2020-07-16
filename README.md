@@ -6,7 +6,18 @@
 
 ## Build
 
-Compile with `go build vinc.go`. This will produce a portable, standalone binary, `vinc`, appropriate for use in shell scripts, in a terminal or within automation pipelines.
+### For local use:
+```
+   go build vinc.go
+```
+This will produce a portable, standalone binary, `vinc`, appropriate for use your local terminal.
+
+### For automation use:
+```
+env GOOS=linux GOARCH=amd64 go build -o vinc vinc.go
+```
+
+This will produce a binary, `vinc`, appropriate for use in most automation pipelines (Linux/AMD64-based).
 
 ## Usage
 
