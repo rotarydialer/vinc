@@ -14,7 +14,7 @@ func main() {
 
 	args := os.Args[1:]
 
-	if (len(args) < 1) {
+	if (len(args) < 2) {
 		showUsage()
 		os.Exit(1)
 	}
@@ -35,16 +35,22 @@ func main() {
 	retVer := srcVer
 	incFlag := os.Args[2]
 
-	fmt.Println("incFlag: " + incFlag)
+	switch incFlag {
+	case "--major":
+		retVer = bumpMajor(srcVer)
+		// fmt.Println("Major version: " + strings.Join(retVer, "."))
+		break
+	case "--minor":
+		retVer = bumpMinor(srcVer)
+		// fmt.Println("Minor version: " + strings.Join(retVer, "."))
+		break
+	case "--patch":
+		retVer = bumpPatch(srcVer)
+		// fmt.Println("Patch version: " + strings.Join(retVer, "."))
+		break
+	}
 
-	retVer = bumpMajor(srcVer)
-	fmt.Println("Major version: " + strings.Join(retVer, "."))
-
-	retVer = bumpMinor(srcVer)
-	fmt.Println("Minor version: " + strings.Join(retVer, "."))
-
-	retVer = bumpPatch(srcVer)
-	fmt.Println("Patch version: " + strings.Join(retVer, "."))
+	fmt.Println(strings.Join(retVer, "."))
 }
 
 func bumpMajor(incVer []string) []string {
