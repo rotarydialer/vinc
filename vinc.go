@@ -10,7 +10,7 @@ import (
 var version string
 
 func main() {
-	version = "0.2.0"
+	version = "0.3.0"
 
 	args := os.Args[1:]
 
@@ -38,15 +38,15 @@ func main() {
 	switch incFlag {
 	case "--major":
 		retVer = bumpMajor(srcVer)
-		// fmt.Println("Major version: " + strings.Join(retVer, "."))
 		break
 	case "--minor":
 		retVer = bumpMinor(srcVer)
-		// fmt.Println("Minor version: " + strings.Join(retVer, "."))
 		break
 	case "--patch":
 		retVer = bumpPatch(srcVer)
-		// fmt.Println("Patch version: " + strings.Join(retVer, "."))
+		break
+	case "--prerelease":
+		retVer = bumpPrerelease(srcVer)
 		break
 	}
 
@@ -78,10 +78,46 @@ func bumpMinor(incVer []string) []string {
 func bumpPatch(incVer []string) []string {
 	var retVer []string
 
-	incVal, _ := strconv.Atoi(incVer[2])
+	var patchVer = splitPrerelease(incVer[2])[0]
+
+	incVal, _ := strconv.Atoi(patchVer)
 	retVer = append(retVer, incVer[0])
 	retVer = append(retVer, incVer[1])
 	retVer = append(retVer, strconv.Itoa(incVal + 1))
+
+	return retVer
+}
+
+func bumpPrerelease(incVer []string) []string {
+	var retVer []string
+	var preLabel string
+
+	var patchAndPre = splitPrerelease(incVer[2])
+
+	var patchVer = patchAndPre[0]
+
+	if (len(patchAndPre) > 1) {
+		incVal, _ := strconv.Atoi(patchAndPre[1])
+		preLabel = strconv.Itoa(incVal + 1)
+	} else {
+		preLabel = "0"
+	}
+
+	retVer = append(retVer, incVer[0])
+	retVer = append(retVer, incVer[1])
+	retVer = append(retVer, patchVer + "-" + preLabel)
+
+	return retVer
+}
+
+func splitPrerelease(patchVer string) []string {
+	var retVer []string
+
+	if (strings.Contains(patchVer, "-")) {
+		retVer = strings.Split(patchVer, "-")
+	} else {
+		retVer = append(retVer, patchVer)
+	}
 
 	return retVer
 }
@@ -96,6 +132,11 @@ func showUsage() {
 	fmt.Println("              [--version]  [--help | -h]")
 	fmt.Println()
 	fmt.Println("Examples:")
+	fmt.Println("   ./vinc 1.5.0 --prerelease")
+	fmt.Println("   1.5.0-0")
+	fmt.Println("   ./vinc 1.5.0-23 --prerelease")
+	fmt.Println("   1.5.0-24")
+	fmt.Println()
 	fmt.Println("   ./vinc 1.5.0 --patch")
 	fmt.Println("   1.5.1")
 	fmt.Println()
